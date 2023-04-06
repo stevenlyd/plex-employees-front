@@ -1,48 +1,68 @@
 import {
-	FetchEmployeesFailureAction,
-	FetchEmployeesRequestAction,
-	FetchEmployeesSuccessAction,
-	employeesActionTypes,
-} from '../actions/employeesActions';
-import { Employee } from '../util/types';
+  FetchEmployeesFailureAction,
+  FetchEmployeesRequestAction,
+  FetchEmployeesSuccessAction,
+  employeesActionTypes,
+} from "../actions/employeesActions";
+import { Employee } from "../util/types";
 
 type AsyncActionTypes =
-	| FetchEmployeesRequestAction
-	| FetchEmployeesSuccessAction
-	| FetchEmployeesFailureAction;
+  | FetchEmployeesRequestAction
+  | FetchEmployeesSuccessAction
+  | FetchEmployeesFailureAction;
 
 export interface States {
-	employeeList: Employee[];
-	loading: boolean;
-	error: string | null;
+  employeeList: Employee[];
+  nextCursor: number | null;
+  prevCursor: number | null;
+  loading: boolean;
+  submitting: boolean;
+  error: string | null;
 }
 
 const initialState: States = {
-	employeeList: [],
-	loading: false,
-	error: null,
+  employeeList: [],
+  loading: false,
+  nextCursor: null,
+  prevCursor: null,
+  submitting: false,
+  error: null,
 };
 
 export const employeesReducer = (
-	state = initialState,
-	action: AsyncActionTypes
+  state = initialState,
+  action: AsyncActionTypes
 ): States => {
-	switch (action.type) {
-		case employeesActionTypes.FETCH_EMPLOYEES:
-			return { ...state, loading: true, error: null };
-		default:
-			return state;
-		case employeesActionTypes.FETCH_EMPLOYEES_SUCCESS:
-			const successAction = action as FetchEmployeesSuccessAction;
-      console.log(successAction.payload);
-			return {
-				...state,
-				employeeList: successAction.payload,
-				loading: false,
-				error: null,
-			};
-		case employeesActionTypes.FETCH_EMPLOYEES_FAILURE:
-			const failureAction = action as FetchEmployeesFailureAction;
-			return { ...state, error: failureAction.payload, loading: false };
-	}
+  switch (action.type) {
+    case employeesActionTypes.FETCH_EMPLOYEES:
+      return { ...state, loading: true, error: null };
+    default:
+      return state;
+    case employeesActionTypes.FETCH_EMPLOYEES_SUCCESS:
+      const successAction = action as FetchEmployeesSuccessAction;
+      return {
+        ...state,
+        employeeList: successAction.payload.data,
+		nextCursor: successAction.payload.nextCursor,
+		prevCursor: successAction.payload.prevCursor,
+        loading: false,
+        error: null,
+      };
+    case employeesActionTypes.FETCH_EMPLOYEES_FAILURE:
+      const failureAction = action as FetchEmployeesFailureAction;
+      return { ...state, error: failureAction.payload, loading: false };
+    case employeesActionTypes.UPDATE_EMPLOYEES:
+      return { ...state, submitting: true, error: null };
+    case employeesActionTypes.UPDATE_EMPLOYEES_SUCCESS:
+      const patchSuccessAction = action as FetchEmployeesSuccessAction;
+      return {
+        ...state,
+        employeeList: patchSuccessAction.payload.data,
+        submitting: false,
+        error: null,
+      };
+    case employeesActionTypes.UPDATE_EMPLOYEES_FAILURE:
+      const patchFailureAction = action as FetchEmployeesFailureAction;
+      return { ...state, error: patchFailureAction.payload, submitting: false };
+  }
 };

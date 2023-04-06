@@ -1,15 +1,11 @@
 export type Employee = {
 	id: number;
-	firstName: String;
-	middleName?: String;
-	lastName: String;
-	gender: String;
-	email: String;
-	phone: String;
-	position: String;
-	department: String;
-	directSupervisors: number[];
-	directReports: number[];
+	firstName: string;
+	lastName: string;
+	email: string;
+	phone: string;
+	position: string;
+	department: string;
 	createdAt: string;
 	updatedAt: string;
 	isDeleted: boolean;
