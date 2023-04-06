@@ -9,7 +9,7 @@ import Employeestable from "./components/EmployeesTable";
 import { AppDispatch, RootState } from "./store";
 import { config } from "./util/config";
 import { Employee } from "./util/types";
-import EditEmployee from "./components/EditEmployee";
+import ConfigureEmployeeModal from "./components/ConfigureEmployeeModal";
 
 function App() {
   const dispatch = useDispatch<AppDispatch>();
@@ -87,7 +87,7 @@ function App() {
         Next Page
       </Button>
       {/* <AddEmployee open={open} onClose={() => setOpen(false)} /> */}
-      <EditEmployee open={open} onClose={() => setOpen(false)} />
+      <ConfigureEmployeeModal open={open} onClose={() => setOpen(false)} />
     </>
   );
 }

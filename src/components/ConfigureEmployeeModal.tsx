@@ -1,22 +1,22 @@
 import { Dialog, Typography } from "@mui/material";
 
 import { Employee } from "../util/types";
-import EditEmployeeForm from "./EditEmployeeForm";
+import ConfigureEmployeeForm from "./ConfigureEmployeeForm";
 
-interface EditEmployeeProps {
+interface ConfigureEmployeeModalProps {
   open: boolean;
   onClose: () => void;
   employee?: Employee;
 }
 
-export default function EditEmployee(EditEmployeeProps: EditEmployeeProps) {
+export default function ConfigureEmployeeModal(EditEmployeeProps: ConfigureEmployeeModalProps) {
   const { open, onClose, employee } = EditEmployeeProps;
   return (
     <Dialog disableScrollLock open={open} onClose={onClose}>
       {
         <>
           <Typography variant="h4">{employee ? "Edit Employee Profile" : "Add Employee Profile"}</Typography>
-          <EditEmployeeForm employee={employee} onClose={onClose} />
+          <ConfigureEmployeeForm employee={employee} onClose={onClose} />
         </>
       }
     </Dialog>

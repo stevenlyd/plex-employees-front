@@ -71,7 +71,7 @@ function extractEmployeeDetails(employee?: Employee) {
   return otherDetails;
 }
 
-export default function EditEmployeeForm({
+export default function ConfigureEmployeeForm({
   employee,
   onClose,
 }: {
@@ -87,7 +87,7 @@ export default function EditEmployeeForm({
     resolver,
     defaultValues: defaultValues?? undefined,
   });
-  const [isEdit, setIsEdit] = useState(employee ? false : true);
+  const [isEdit, setIsEdit] = useState(!!employee);
   const dispatch = useDispatch<AppDispatch>();
 
   const onSubmit: SubmitHandler<FormValues> = (data) => {

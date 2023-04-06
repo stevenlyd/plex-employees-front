@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import { useTable } from "react-table";
 
-import EditEmployee from "./EditEmployee";
+import EditEmployee from "./ConfigureEmployeeModal";
 
 export default function Employeestable({ employees }: { employees: any[] }) {
   const [open, setOpen] = useState(false);
