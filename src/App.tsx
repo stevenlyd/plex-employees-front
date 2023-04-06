@@ -5,11 +5,11 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { fetchEmployees } from "./actions/employeesActions";
 import "./App.css";
-import AddEmployee from "./components/AddEmployee";
 import Employeestable from "./components/EmployeesTable";
 import { AppDispatch } from "./store";
 import { config } from "./util/config";
 import { Employee } from "./util/types";
+import EditEmployee from "./components/EditEmployee";
 
 function App() {
   const dispatch = useDispatch<AppDispatch>();
@@ -88,7 +88,8 @@ function App() {
       >
         Next Page
       </Button>
-      <AddEmployee open={open} onClose={() => setOpen(false)} />
+      {/* <AddEmployee open={open} onClose={() => setOpen(false)} /> */}
+      <EditEmployee open={open} onClose={() => setOpen(false)} />
     </>
   );
 }

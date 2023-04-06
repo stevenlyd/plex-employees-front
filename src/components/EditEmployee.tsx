@@ -6,7 +6,7 @@ import EditEmployeeForm from "./EditEmployeeForm";
 interface EditEmployeeProps {
   open: boolean;
   onClose: () => void;
-  employee: Employee;
+  employee?: Employee;
 }
 
 export default function EditEmployee(EditEmployeeProps: EditEmployeeProps) {
@@ -15,7 +15,7 @@ export default function EditEmployee(EditEmployeeProps: EditEmployeeProps) {
     <Dialog disableScrollLock open={open} onClose={onClose}>
       {
         <>
-          <Typography variant="h4">Edit Employee Profile</Typography>
+          <Typography variant="h4">{employee ? "Edit Employee Profile" : "Add Employee Profile"}</Typography>
           <EditEmployeeForm employee={employee} onClose={onClose} />
         </>
       }

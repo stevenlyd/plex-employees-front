@@ -4,7 +4,11 @@ import { Button, TextField } from "@mui/material";
 import { Resolver, SubmitHandler, useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 
-import { deleteEmployee, updateEmployees } from "../actions/employeesActions";
+import {
+  addEmployee,
+  deleteEmployee,
+  updateEmployees,
+} from "../actions/employeesActions";
 import { AppDispatch } from "../store";
 import { Employee } from "../util/types";
 
@@ -52,25 +56,51 @@ const resolver: Resolver<FormValues> = async (values) => {
   };
 };
 
+function extractEmployeeDetails(employee?: Employee) {
+  if (!employee) {
+    return;
+  }
+
+  const {
+    id,
+    createdAt,
+    updatedAt,
+    ...otherDetails
+  } = employee;
+
+  return otherDetails;
+}
+
 export default function EditEmployeeForm({
   employee,
   onClose,
 }: {
-  employee: Employee;
+  employee?: Employee;
   onClose: () => void;
 }) {
-  const { updatedAt, createdAt, id, ...defaultValues } = employee;
+  const defaultValues = extractEmployeeDetails(employee); //Extracts the employee details from the employee object, removes the id, createdAt, and updatedAt properties
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormValues>({ resolver, defaultValues: defaultValues });
-  const [isEdit, setIsEdit] = useState(false);
+  } = useForm<FormValues>({
+    resolver,
+    defaultValues: defaultValues?? undefined,
+  });
+  const [isEdit, setIsEdit] = useState(employee ? false : true);
   const dispatch = useDispatch<AppDispatch>();
 
   const onSubmit: SubmitHandler<FormValues> = (data) => {
-    const { updatedAt, createdAt, ...toBeSubmitted } = { ...employee, ...data };
-    dispatch(updateEmployees(toBeSubmitted));
+    if (employee) {
+      const { updatedAt, createdAt, ...toBeSubmitted } = {
+        ...employee,
+        ...data,
+      };
+      dispatch(updateEmployees(toBeSubmitted));
+    } else {
+      dispatch(addEmployee(data));
+      onClose()
+    }
   };
   return (
     <>
@@ -107,23 +137,29 @@ export default function EditEmployeeForm({
           label="Position"
           disabled={!isEdit}
         />
-        <Button
-          type={isEdit ? "button" : "submit"}
-          onClick={() => {
-            setIsEdit(!isEdit);
-          }}
-        >
-          {isEdit ? "Submit" : "Edit"}
-        </Button>
-        <Button
-          type="button"
-          onClick={() => {
-            dispatch(deleteEmployee(employee.id));
-            onClose();
-          }}
-        >
-          Delete Employee
-        </Button>
+        {!employee && <Button type="submit">Add Employee</Button>}
+        {employee && (
+          <Button
+            type={isEdit ? "button" : "submit"}
+            onClick={() => {
+              setIsEdit(!isEdit);
+            }}
+          >
+            {isEdit ? "Submit" : "Edit"}
+          </Button>
+        )}
+
+        {employee && (
+          <Button
+            type="button"
+            onClick={() => {
+              dispatch(deleteEmployee(employee.id));
+              onClose();
+            }}
+          >
+            Delete Employee
+          </Button>
+        )}
       </form>
     </>
   );
