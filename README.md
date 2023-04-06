@@ -1,8 +1,8 @@
-# Plexxis Employees Front
+# Plexxis Employees
 
 ## Overview
 
-Plexxis Employees Front is a full-stack React application created using Create React App with TypeScript. It's designed as a CRUD application to manage an employee list through REST API. 
+Plexxis Employees is a full-stack React application created using Create React App with TypeScript. It's designed as a CRUD application to manage an employee list through REST API. 
 
 ## Features
 
