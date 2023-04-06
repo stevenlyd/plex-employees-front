@@ -1,0 +1,11 @@
+{
+    "tabWidth": 2,
+    "semi": true,
+    "singleQuote": false,
+    "importOrder": ["^react$", "^mui$", "<THIRD_PARTY_MODULES>", "^components/(.*)$", "^[./]"],
+    "importOrderSeparation": true,
+    "importOrderCaseInsensitive": true,
+    "importOrderSortSpecifiers": true,
+    "importOrderGroupNamespaceSpecifiers": true
+  }
+  
