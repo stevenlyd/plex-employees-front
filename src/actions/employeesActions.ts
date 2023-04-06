@@ -1,4 +1,5 @@
-import { FetchEmployeesResponse } from "../util/interfaces";
+import { API } from "../util/config";
+import { FetchEmployeesResponse } from "../util/types";
 import { Employee } from "../util/types";
 
 export const employeesActionTypes = {
@@ -48,7 +49,8 @@ export const fetchEmployees =
     dispatch(fetchEmployeesRequest());
     try {
       const response = await fetch(
-        "http://localhost:3001/employees?" +
+        API +
+          "?" +
           new URLSearchParams(
             cursor
               ? {
@@ -107,7 +109,7 @@ export const updateEmployees =
   async (dispatch: any) => {
     dispatch(updateEmployeesRequest());
     try {
-      await fetch(`http://localhost:3001/employees/${employee.id}`, {
+      await fetch(`${API}/${employee.id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
@@ -146,7 +148,7 @@ export const addEmployee =
   (employee: Omit<Employee, "id" | "createdAt" | "updatedAt" | "isDeleted">) =>
   async (dispatch: any) => {
     try {
-      await fetch("http://localhost:3001/employees", {
+      await fetch(API!, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -161,7 +163,7 @@ export const addEmployee =
 
 export const deleteEmployee = (id: number) => async (dispatch: any) => {
   try {
-    await fetch(`http://localhost:3001/employees/${id}`, {
+    await fetch(`${API}/${id}`, {
       method: "DELETE",
     });
     dispatch(fetchEmployees());

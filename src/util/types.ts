@@ -10,3 +10,9 @@ export type Employee = {
   updatedAt: string;
   isDeleted: boolean;
 };
+
+export interface FetchEmployeesResponse {
+  data: Employee[];
+  nextCursor: number | null;
+  prevCursor: number | null;
+}
