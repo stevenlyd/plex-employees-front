@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchEmployees } from "./actions/employeesActions";
 import "./App.css";
 import Employeestable from "./components/EmployeesTable";
-import { AppDispatch } from "./store";
+import { AppDispatch, RootState } from "./store";
 import { config } from "./util/config";
 import { Employee } from "./util/types";
 import EditEmployee from "./components/EditEmployee";
@@ -14,13 +14,13 @@ import EditEmployee from "./components/EditEmployee";
 function App() {
   const dispatch = useDispatch<AppDispatch>();
   const employees: Employee[] = useSelector(
-    (state: any) => state.employeesReducer.employeeList
+    (state: RootState) => state.employeesReducer.employeeList
   );
   const nextCursor = useSelector(
-    (state: any) => state.employeesReducer.nextCursor
+    (state: RootState) => state.employeesReducer.nextCursor
   );
   const prevCursor = useSelector(
-    (state: any) => state.employeesReducer.prevCursor
+    (state: RootState) => state.employeesReducer.prevCursor
   );
   const [searchKeyword, setSearchKeyword] = useState("");
   const [open, setOpen] = useState(false);
@@ -68,7 +68,6 @@ function App() {
       <Employeestable employees={employees} />
       <Button
         onClick={() => {
-          console.log(prevCursor);
           if (prevCursor) {
             dispatch(fetchEmployees(searchKeyword, prevCursor, -limit));
           }
@@ -79,7 +78,6 @@ function App() {
       </Button>
       <Button
         onClick={() => {
-          console.log(nextCursor);
           if (nextCursor) {
             dispatch(fetchEmployees(searchKeyword, nextCursor, limit));
           }
