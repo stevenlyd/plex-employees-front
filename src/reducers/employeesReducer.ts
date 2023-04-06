@@ -52,20 +52,50 @@ export const employeesReducer = (
     case employeesActionTypes.FETCH_EMPLOYEES_FAILURE:
       const failureAction = action as FetchEmployeesFailureAction;
       return { ...state, error: failureAction.payload, loading: false };
-    case employeesActionTypes.UPDATE_EMPLOYEES:
+    case employeesActionTypes.UPDATE_EMPLOYEE:
       return { ...state, submitting: true, error: null };
-    case employeesActionTypes.UPDATE_EMPLOYEES_SUCCESS:
+    case employeesActionTypes.UPDATE_EMPLOYEE_SUCCESS:
       return {
         ...state,
         submitting: false,
         error: null,
       };
-    case employeesActionTypes.UPDATE_EMPLOYEES_FAILURE:
+    case employeesActionTypes.UPDATE_EMPLOYEE_FAILURE:
       const updateFailureAction = action as FetchEmployeesFailureAction;
       return {
         ...state,
         error: updateFailureAction.payload,
         submitting: false,
       };
+      case employeesActionTypes.ADD_EMPLOYEE:
+        return { ...state, submitting: true, error: null };
+      case employeesActionTypes.ADD_EMPLOYEE_SUCCESS:
+        return {
+          ...state,
+          submitting: false,
+          error: null,
+        };
+      case employeesActionTypes.ADD_EMPLOYEE_FAILURE:
+        const addFailureAction = action as FetchEmployeesFailureAction;
+        return {
+          ...state,
+          error: addFailureAction.payload,
+          submitting: false,
+        };
+        case employeesActionTypes.DELETE_EMPLOYEE:
+          return { ...state, submitting: true, error: null };
+        case employeesActionTypes.DELETE_EMPLOYEE_SUCCESS:
+          return {
+            ...state,
+            submitting: false,
+            error: null,
+          };
+        case employeesActionTypes.DELETE_EMPLOYEE_FAILURE:
+          const deleteFailureAction = action as FetchEmployeesFailureAction;
+          return {
+            ...state,
+            error: deleteFailureAction.payload,
+            submitting: false,
+          };
   }
 };
