@@ -1,46 +1,56 @@
-# Getting Started with Create React App
+# Plexxis Employees
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Overview
 
-## Available Scripts
+Plexxis Employees is a React application created using Create React App with TypeScript. It's designed as a CRUD application to manage an employee list through REST API. 
 
-In the project directory, you can run:
+## Features
 
-### `npm start`
+- Retrieve employees from a REST API.
+- Display employees in a table using React Table and Material UI's table component.
+- Create, edit, and delete employees using a pop-up dialog with automatic form validation.
+- Search with debounce.
+- Cursor-based pagination to avoid potential performance issues with large datasets.
+- Add new employees using a pop-up dialog.
+## Technologies Used
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- React with TypeScript
+- Material UI
+- Redux
+- React Table
+- React Hook Form
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Setup
 
-### `npm test`
+1. Clone the repository to your local machine.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```shell script
+git clone https://github.com/stevenlyd/plex-employees-front.git
+```
+2. Navigate to the project folder, install the required dependencies.
+```shell script
+npm install
+```
+3. Create a new `.env` file in the root folder and add the following line to specify the backend API URL.
+```.env file
+API="<backend-url>/employees"
+```
+5. Run the application (make sure the backend is already running).
+```shell script
+npm run start
+```
+6. The application will run on `http://localhost:3000`
+## Application Flow 
+1. The main page displays the employee list in a table. You can search  for  specific employees using the search bar. The search functionality includes debounce to improve performance. 
+2. To  add a new employee, click the "Add Employee" button. A pop-up dialog will appear, where you can enter the employee information. The form includes automatic validation to ensure the data is entered correctly. 
+3. To edit or  delete an existing employee, click on the employee row  in the table. A pop-up dialog will appear, allowing you to edit the employee information or  delete the employee. 
+4. The application supports cursor-based pagination to efficiently handle large datasets and avoid potential performance issues. 
+## Bonus Features 
+- [x] UI mechanisms to edit/update employee data 
+- [x] Use React Table
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
