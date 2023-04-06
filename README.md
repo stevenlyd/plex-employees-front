@@ -33,7 +33,7 @@ npm install
 ```
 3. Create a new `.env` file in the root folder and add the following line to specify the backend API URL.
 ```.env file
-API="<backend-url>/employees"
+REACT_APP_BACKEND_API="<backend-url>/employees"
 ```
 5. Run the application (make sure the backend is already running).
 ```shell script
