@@ -2,7 +2,7 @@
 
 ## Overview
 
-Plexxis Employees is a full-stack React application created using Create React App with TypeScript. It's designed as a CRUD application to manage an employee list through REST API. 
+Plexxis Employees is a React application created using Create React App with TypeScript. It's designed as a CRUD application to manage an employee list through REST API. 
 
 ## Features
 
@@ -14,7 +14,7 @@ Plexxis Employees is a full-stack React application created using Create React A
 - Add new employees using a pop-up dialog.
 ## Technologies Used
 
-- React-TypeScript
+- React with TypeScript
 - Material UI
 - Redux
 - React Table
@@ -32,11 +32,14 @@ git clone https://github.com/stevenlyd/plex-employees-front.git
 npm install
 ```
 3. Create a new `.env` file in the root folder and add the following line to specify the backend API URL.
-4. Run the application.
+```.env file
+API="<backend-url>/employees"
+```
+5. Run the application (make sure the backend is already running).
 ```shell script
 npm run start
 ```
-5. The application will run on `http://localhost:3000`
+6. The application will run on `http://localhost:3000`
 ## Application Flow 
 1. The main page displays the employee list in a table. You can search  for  specific employees using the search bar. The search functionality includes debounce to improve performance. 
 2. To  add a new employee, click the "Add Employee" button. A pop-up dialog will appear, where you can enter the employee information. The form includes automatic validation to ensure the data is entered correctly. 
