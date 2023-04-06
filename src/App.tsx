@@ -86,7 +86,6 @@ function App() {
       >
         Next Page
       </Button>
-      {/* <AddEmployee open={open} onClose={() => setOpen(false)} /> */}
       <ConfigureEmployeeModal open={open} onClose={() => setOpen(false)} />
     </>
   );
