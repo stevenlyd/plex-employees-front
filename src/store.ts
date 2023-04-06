@@ -1,6 +1,7 @@
-import { configureStore, combineReducers, Action } from "@reduxjs/toolkit";
+import { Action, combineReducers, configureStore } from "@reduxjs/toolkit";
 import { ThunkAction, ThunkDispatch } from "redux-thunk";
-import { employeesReducer } from './reducers/employeesReducer';
+
+import { employeesReducer } from "./reducers/employeesReducer";
 
 const rootReducer = combineReducers({
   employeesReducer,
@@ -8,7 +9,12 @@ const rootReducer = combineReducers({
 
 export type RootState = ReturnType<typeof rootReducer>;
 
-export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, RootState, unknown, Action<string>>;
+export type AppThunk<ReturnType = void> = ThunkAction<
+  ReturnType,
+  RootState,
+  unknown,
+  Action<string>
+>;
 
 export type AppDispatch = ThunkDispatch<RootState, unknown, Action<string>>;
 

@@ -24,16 +24,15 @@ export interface FetchEmployeesFailureAction {
   payload: string;
 }
 
-export interface PatchEmployeesRequestAction {
+export interface UpdateEmployeesRequestAction {
   type: typeof employeesActionTypes.UPDATE_EMPLOYEES;
 }
 
-export interface PatchEmployeesSuccessAction {
+export interface UpdateEmployeesSuccessAction {
   type: typeof employeesActionTypes.UPDATE_EMPLOYEES_SUCCESS;
-  payload: Employee[];
 }
 
-export interface PatchEmployeesFailureAction {
+export interface UpdateEmployeesFailureAction {
   type: typeof employeesActionTypes.UPDATE_EMPLOYEES_FAILURE;
   payload: string;
 }
@@ -50,21 +49,25 @@ export const fetchEmployees =
     try {
       const response = await fetch(
         "http://localhost:3001/employees?" +
-          new URLSearchParams(cursor ? {
-            keyword: searchKeyword!,
-            limit: limit.toString(),
-			cursor: cursor.toString(),
-          } : {
-			keyword: searchKeyword!,
-			limit: limit.toString(),
-		  }),
+          new URLSearchParams(
+            cursor
+              ? {
+                  keyword: searchKeyword!,
+                  limit: limit.toString(),
+                  cursor: cursor.toString(),
+                }
+              : {
+                  keyword: searchKeyword!,
+                  limit: limit.toString(),
+                }
+          ),
         {
           method: "GET",
           signal: abortController.signal,
         }
       );
       setTimeout(() => abortController.abort(), 5000);
-      const data:FetchEmployeesResponse = await response.json();
+      const data: FetchEmployeesResponse = await response.json();
       dispatch(
         fetchEmployeesSuccess(data.data, data.nextCursor, data.prevCursor)
       );
@@ -111,31 +114,28 @@ export const updateEmployees =
         },
         body: JSON.stringify(employee),
       });
+      dispatch(updateEmployeesSuccess());
       dispatch(fetchEmployees());
-      // dispatch(patchEmployeesSuccess(res));
     } catch (error: any) {
-      // dispatch(patchEmployeesFailure(error.message));
+      dispatch(updateEmployeesFailure(error.message));
     }
   };
 
-export const updateEmployeesRequest = (): PatchEmployeesRequestAction => {
+export const updateEmployeesRequest = (): UpdateEmployeesRequestAction => {
   return {
     type: employeesActionTypes.UPDATE_EMPLOYEES,
   };
 };
 
-export const updateEmployeesSuccess = (
-  data: Employee[]
-): PatchEmployeesSuccessAction => {
+export const updateEmployeesSuccess = (): UpdateEmployeesSuccessAction => {
   return {
     type: employeesActionTypes.UPDATE_EMPLOYEES_SUCCESS,
-    payload: data,
   };
 };
 
 export const updateEmployeesFailure = (
   error: string
-): PatchEmployeesFailureAction => {
+): UpdateEmployeesFailureAction => {
   return {
     type: employeesActionTypes.UPDATE_EMPLOYEES_FAILURE,
     payload: error,

@@ -1,10 +1,12 @@
-import { Resolver, useForm, SubmitHandler } from "react-hook-form";
-import { Employee } from "../util/types";
-import { Button, TextField } from "@mui/material";
 import { useState } from "react";
+
+import { Button, TextField } from "@mui/material";
+import { Resolver, SubmitHandler, useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
-import { AppDispatch } from "../store";
+
 import { deleteEmployee, updateEmployees } from "../actions/employeesActions";
+import { AppDispatch } from "../store";
+import { Employee } from "../util/types";
 
 interface FormValues {
   firstName: string;
@@ -50,7 +52,13 @@ const resolver: Resolver<FormValues> = async (values) => {
   };
 };
 
-export default function EditEmployeeForm({ employee, onClose }: { employee: Employee, onClose: () => void }) {
+export default function EditEmployeeForm({
+  employee,
+  onClose,
+}: {
+  employee: Employee;
+  onClose: () => void;
+}) {
   const { updatedAt, createdAt, id, ...defaultValues } = employee;
   const {
     register,
@@ -107,12 +115,15 @@ export default function EditEmployeeForm({ employee, onClose }: { employee: Empl
         >
           {isEdit ? "Submit" : "Edit"}
         </Button>
-        <Button 
-        type="button"
-        onClick={() => {
-          dispatch(deleteEmployee(employee.id))
-          onClose()
-        }}>Delete Employee</Button>
+        <Button
+          type="button"
+          onClick={() => {
+            dispatch(deleteEmployee(employee.id));
+            onClose();
+          }}
+        >
+          Delete Employee
+        </Button>
       </form>
     </>
   );

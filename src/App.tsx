@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from "react";
-import "./App.css";
+
+import { Button, debounce, TextField, Typography } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
+
 import { fetchEmployees } from "./actions/employeesActions";
-import { AppDispatch } from "./store";
-import Employeestable from "./components/EmployeesTable";
-import { Button, TextField, Typography, debounce } from "@mui/material";
-import { Employee } from "./util/types";
+import "./App.css";
 import AddEmployee from "./components/AddEmployee";
+import Employeestable from "./components/EmployeesTable";
+import { AppDispatch } from "./store";
+import { config } from "./util/config";
+import { Employee } from "./util/types";
 
 function App() {
   const dispatch = useDispatch<AppDispatch>();
@@ -22,7 +25,7 @@ function App() {
   const [searchKeyword, setSearchKeyword] = useState("");
   const [open, setOpen] = useState(false);
   const [cursor, setCursor] = useState(null);
-  const [limit, setLimit] = useState(5);
+  const limit = config.PAGE_LIMIT;
 
   useEffect(() => {
     const abortController = new AbortController();
@@ -34,7 +37,6 @@ function App() {
 
   const handleSearch = debounce((searchVal: string) => {
     setCursor(null);
-    setLimit(5);
     const searchStr = searchVal.trim().toLowerCase();
 
     // Once the input value cleared, clear the search result
@@ -68,7 +70,7 @@ function App() {
         onClick={() => {
           console.log(prevCursor);
           if (prevCursor) {
-			dispatch(fetchEmployees(searchKeyword, prevCursor, -5))
+            dispatch(fetchEmployees(searchKeyword, prevCursor, -limit));
           }
         }}
         disabled={prevCursor === null}
@@ -79,7 +81,7 @@ function App() {
         onClick={() => {
           console.log(nextCursor);
           if (nextCursor) {
-			dispatch(fetchEmployees(searchKeyword, nextCursor, 5))
+            dispatch(fetchEmployees(searchKeyword, nextCursor, limit));
           }
         }}
         disabled={nextCursor === null}

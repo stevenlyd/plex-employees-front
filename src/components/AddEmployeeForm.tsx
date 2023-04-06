@@ -1,8 +1,9 @@
-import { Resolver, useForm, SubmitHandler } from "react-hook-form";
 import { Button, TextField } from "@mui/material";
+import { Resolver, SubmitHandler, useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
-import { AppDispatch } from "../store";
+
 import { addEmployee } from "../actions/employeesActions";
+import { AppDispatch } from "../store";
 
 interface FormValues {
   firstName: string;
@@ -47,7 +48,7 @@ const resolver: Resolver<FormValues> = async (values) => {
   };
 };
 
-export default function AddEmployeeForm({onClose}: {onClose: () => void}) {
+export default function AddEmployeeForm({ onClose }: { onClose: () => void }) {
   const {
     register,
     handleSubmit,

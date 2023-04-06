@@ -1,4 +1,5 @@
 import { Dialog, Typography } from "@mui/material";
+
 import { Employee } from "../util/types";
 import EditEmployeeForm from "./EditEmployeeForm";
 
@@ -15,7 +16,7 @@ export default function EditEmployee(EditEmployeeProps: EditEmployeeProps) {
       {
         <>
           <Typography variant="h4">Edit Employee Profile</Typography>
-          <EditEmployeeForm employee={employee} onClose={onClose}/>
+          <EditEmployeeForm employee={employee} onClose={onClose} />
         </>
       }
     </Dialog>

@@ -1,9 +1,10 @@
 import { Dialog, Typography } from "@mui/material";
+
 import AddEmployeeForm from "./AddEmployeeForm";
 
 interface AddEmployeeProps {
-    open: boolean;
-    onClose: () => void;
+  open: boolean;
+  onClose: () => void;
 }
 
 export default function AddEmployee(AddEmployeeProps: AddEmployeeProps) {
@@ -13,7 +14,7 @@ export default function AddEmployee(AddEmployeeProps: AddEmployeeProps) {
       {
         <>
           <Typography variant="h4">Add Employee Profile</Typography>
-          <AddEmployeeForm onClose={onClose}/>
+          <AddEmployeeForm onClose={onClose} />
         </>
       }
     </Dialog>

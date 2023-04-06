@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { useTable } from "react-table";
+
 import {
   Table,
   TableBody,
@@ -9,6 +9,8 @@ import {
   TableRow,
   Typography,
 } from "@mui/material";
+import { useTable } from "react-table";
+
 import EditEmployee from "./EditEmployee";
 
 export default function Employeestable({ employees }: { employees: any[] }) {

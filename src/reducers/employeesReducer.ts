@@ -1,8 +1,9 @@
 import {
+  employeesActionTypes,
   FetchEmployeesFailureAction,
   FetchEmployeesRequestAction,
   FetchEmployeesSuccessAction,
-  employeesActionTypes,
+  UpdateEmployeesSuccessAction,
 } from "../actions/employeesActions";
 import { Employee } from "../util/types";
 
@@ -43,8 +44,8 @@ export const employeesReducer = (
       return {
         ...state,
         employeeList: successAction.payload.data,
-		nextCursor: successAction.payload.nextCursor,
-		prevCursor: successAction.payload.prevCursor,
+        nextCursor: successAction.payload.nextCursor,
+        prevCursor: successAction.payload.prevCursor,
         loading: false,
         error: null,
       };
@@ -54,15 +55,17 @@ export const employeesReducer = (
     case employeesActionTypes.UPDATE_EMPLOYEES:
       return { ...state, submitting: true, error: null };
     case employeesActionTypes.UPDATE_EMPLOYEES_SUCCESS:
-      const patchSuccessAction = action as FetchEmployeesSuccessAction;
       return {
         ...state,
-        employeeList: patchSuccessAction.payload.data,
         submitting: false,
         error: null,
       };
     case employeesActionTypes.UPDATE_EMPLOYEES_FAILURE:
-      const patchFailureAction = action as FetchEmployeesFailureAction;
-      return { ...state, error: patchFailureAction.payload, submitting: false };
+      const updateFailureAction = action as FetchEmployeesFailureAction;
+      return {
+        ...state,
+        error: updateFailureAction.payload,
+        submitting: false,
+      };
   }
 };
