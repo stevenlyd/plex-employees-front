@@ -87,7 +87,7 @@ export default function ConfigureEmployeeForm({
     resolver,
     defaultValues: defaultValues?? undefined,
   });
-  const [isEdit, setIsEdit] = useState(!!employee);
+  const [isEdit, setIsEdit] = useState(!employee);
   const dispatch = useDispatch<AppDispatch>();
 
   const onSubmit: SubmitHandler<FormValues> = (data) => {
