@@ -3,8 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@emotion/css": "^11.10.6",
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
+    "@mui/icons-material": "^5.11.16",
     "@mui/material": "^5.11.15",
     "@mui/x-data-grid": "^6.0.4",
     "@reduxjs/toolkit": "^1.9.3",
@@ -53,6 +55,7 @@
     ]
   },
   "devDependencies": {
+    "@hookform/devtools": "^4.3.1",
     "@trivago/prettier-plugin-sort-imports": "^4.1.1"
   }
 }

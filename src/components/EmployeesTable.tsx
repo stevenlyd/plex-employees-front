@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 
 import {
+  SxProps,
   Table,
   TableBody,
   TableCell,
@@ -50,10 +51,17 @@ export default function Employeestable({ employees }: { employees: any[] }) {
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     useTable({ columns, data });
 
+  const styles = {
+    tableContainer: {
+      border: "1px solid #e0e0e0",
+      borderRadius: "5px",
+    } as SxProps,
+  };
+
   return (
     <>
       {employees.length > 0 ? (
-        <TableContainer>
+        <TableContainer sx={styles.tableContainer}>
           <Table {...getTableProps()}>
             <TableHead>
               {headerGroups.map((headerGroup) => (
