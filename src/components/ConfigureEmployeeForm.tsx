@@ -84,6 +84,9 @@ export default function ConfigureEmployeeForm({
       color: "red",
       minHeight: "1.5rem",
     } as SxProps,
+    textField:{
+      minWidth: "300px",
+    } as SxProps,
   };
 
   return (
@@ -100,6 +103,7 @@ export default function ConfigureEmployeeForm({
               })}
               label="First Name"
               disabled={!isEdit}
+              sx={styles.textField}
             />
             <Typography sx={styles.error}>
               {errors.firstName?.message}
@@ -115,6 +119,7 @@ export default function ConfigureEmployeeForm({
               })}
               label="Last Name"
               disabled={!isEdit}
+              sx={styles.textField}
             />
             <Typography sx={styles.error}>
               {errors.lastName?.message}
@@ -135,6 +140,7 @@ export default function ConfigureEmployeeForm({
               })}
               label="Email"
               disabled={!isEdit}
+              sx={styles.textField}
             />
             <Typography sx={styles.error}>{errors.email?.message}</Typography>
           </Box>
@@ -153,6 +159,7 @@ export default function ConfigureEmployeeForm({
               })}
               label="Phone Number"
               disabled={!isEdit}
+              sx={styles.textField}
             />
             <Typography sx={styles.error}>{errors.phone?.message}</Typography>
           </Box>
@@ -166,6 +173,7 @@ export default function ConfigureEmployeeForm({
               })}
               label="Department"
               disabled={!isEdit}
+              sx={styles.textField}
             />
             <Typography sx={styles.error}>
               {errors.department?.message}
@@ -181,6 +189,7 @@ export default function ConfigureEmployeeForm({
               })}
               label="Position"
               disabled={!isEdit}
+              sx={styles.textField}
             />
             <Typography sx={styles.error}>
               {errors.position?.message}

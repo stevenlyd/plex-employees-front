@@ -37,7 +37,9 @@ function App() {
   const prevCursor = useSelector(
     (states: RootState) => states.employeesReducer.prevCursor
   );
-  const success = useSelector((states: RootState) => states.employeesReducer.success);
+  const success = useSelector(
+    (states: RootState) => states.employeesReducer.success
+  );
 
   const [searchKeyword, setSearchKeyword] = useState("");
   const [open, setOpen] = useState(false);
