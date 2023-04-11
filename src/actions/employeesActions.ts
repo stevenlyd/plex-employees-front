@@ -195,17 +195,17 @@ export const addEmployee =
     }
   };
 
-  export const addEmployeesRequest = (): AddEmployeesRequestAction => {
+export const addEmployeesRequest = (): AddEmployeesRequestAction => {
   return {
     type: employeesActionTypes.ADD_EMPLOYEE,
   };
-}
+};
 
 export const addEmployeesSuccess = (): AddEmployeesSuccessAction => {
   return {
     type: employeesActionTypes.ADD_EMPLOYEE_SUCCESS,
   };
-}
+};
 
 export const addEmployeesFailure = (
   error: string
@@ -217,7 +217,7 @@ export const addEmployeesFailure = (
 };
 
 export const deleteEmployee = (id: number) => async (dispatch: any) => {
-  dispatch (deleteEmployeesRequest());
+  dispatch(deleteEmployeesRequest());
   try {
     await fetch(`${API}/${id}`, {
       method: "DELETE",
@@ -233,13 +233,13 @@ export const deleteEmployeesRequest = (): DeleteEmployeesRequestAction => {
   return {
     type: employeesActionTypes.DELETE_EMPLOYEE,
   };
-}
+};
 
 export const deleteEmployeesSuccess = (): DeleteEmployeesSuccessAction => {
   return {
     type: employeesActionTypes.DELETE_EMPLOYEE_SUCCESS,
   };
-}
+};
 
 export const deleteEmployeesFailure = (
   error: string
@@ -248,4 +248,4 @@ export const deleteEmployeesFailure = (
     type: employeesActionTypes.DELETE_EMPLOYEE_FAILURE,
     payload: error,
   };
-}
+};

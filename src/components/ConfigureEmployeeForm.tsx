@@ -1,7 +1,14 @@
 import { useState } from "react";
 
 import { DevTool } from "@hookform/devtools";
-import { Box, Button, Container, SxProps, TextField, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Container,
+  SxProps,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 
@@ -75,7 +82,7 @@ export default function ConfigureEmployeeForm({
     } as SxProps,
     error: {
       color: "red",
-      minHeight: '1.5rem'
+      minHeight: "1.5rem",
     } as SxProps,
   };
 
@@ -129,9 +136,7 @@ export default function ConfigureEmployeeForm({
               label="Email"
               disabled={!isEdit}
             />
-            <Typography sx={styles.error}>
-              {errors.email?.message}
-            </Typography>
+            <Typography sx={styles.error}>{errors.email?.message}</Typography>
           </Box>
           <Box sx={styles.formSection}>
             <TextField
@@ -149,9 +154,7 @@ export default function ConfigureEmployeeForm({
               label="Phone Number"
               disabled={!isEdit}
             />
-            <Typography sx={styles.error}>
-              {errors.phone?.message}
-            </Typography>
+            <Typography sx={styles.error}>{errors.phone?.message}</Typography>
           </Box>
           <Box sx={styles.formSection}>
             <TextField
@@ -190,7 +193,7 @@ export default function ConfigureEmployeeForm({
               type={isEdit ? "button" : "submit"}
               onClick={() => {
                 if (Object.keys(errors).length !== 0) {
-                  return
+                  return;
                 }
                 setIsEdit(!isEdit);
               }}
