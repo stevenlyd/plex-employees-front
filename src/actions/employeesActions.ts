@@ -1,4 +1,4 @@
-import { API } from "../util/config";
+import { API, config } from "../util/config";
 import { FetchEmployeesResponse } from "../util/types";
 import { Employee } from "../util/types";
 
@@ -37,6 +37,7 @@ export interface UpdateEmployeesRequestAction {
 
 export interface UpdateEmployeesSuccessAction {
   type: typeof employeesActionTypes.UPDATE_EMPLOYEE_SUCCESS;
+  payload: string | null;
 }
 
 export interface UpdateEmployeesFailureAction {
@@ -50,6 +51,7 @@ export interface AddEmployeesRequestAction {
 
 export interface AddEmployeesSuccessAction {
   type: typeof employeesActionTypes.ADD_EMPLOYEE_SUCCESS;
+  payload: string | null;
 }
 
 export interface AddEmployeesFailureAction {
@@ -63,6 +65,7 @@ export interface DeleteEmployeesRequestAction {
 
 export interface DeleteEmployeesSuccessAction {
   type: typeof employeesActionTypes.DELETE_EMPLOYEE_SUCCESS;
+  payload: string | null;
 }
 
 export interface DeleteEmployeesFailureAction {
@@ -74,7 +77,7 @@ export const fetchEmployees =
   (
     searchKeyword: string = "",
     cursor: number | null = null,
-    limit: number = 5,
+    limit: number = config.PAGE_LIMIT,
     abortController: AbortController = new AbortController()
   ) =>
   async (dispatch: any) => {
@@ -148,7 +151,10 @@ export const updateEmployees =
         },
         body: JSON.stringify(employee),
       });
-      dispatch(updateEmployeesSuccess());
+      dispatch(updateEmployeesSuccess("Employee updated successfully!"));
+      setTimeout(() => {
+        dispatch(updateEmployeesSuccess(null));
+      }, 3000);
       dispatch(fetchEmployees());
     } catch (error: any) {
       dispatch(updateEmployeesFailure(error.message));
@@ -161,9 +167,12 @@ export const updateEmployeesRequest = (): UpdateEmployeesRequestAction => {
   };
 };
 
-export const updateEmployeesSuccess = (): UpdateEmployeesSuccessAction => {
+export const updateEmployeesSuccess = (
+  text: string | null
+): UpdateEmployeesSuccessAction => {
   return {
     type: employeesActionTypes.UPDATE_EMPLOYEE_SUCCESS,
+    payload: text,
   };
 };
 
@@ -188,7 +197,10 @@ export const addEmployee =
         },
         body: JSON.stringify(employee),
       });
-      dispatch(addEmployeesSuccess());
+      dispatch(addEmployeesSuccess("Employee added successfully!"));
+      setTimeout(() => {
+        dispatch(addEmployeesSuccess(null));
+      }, 3000);
       dispatch(fetchEmployees());
     } catch (error: any) {
       dispatch(addEmployeesFailure(error.message));
@@ -201,9 +213,12 @@ export const addEmployeesRequest = (): AddEmployeesRequestAction => {
   };
 };
 
-export const addEmployeesSuccess = (): AddEmployeesSuccessAction => {
+export const addEmployeesSuccess = (
+  text: string | null
+): AddEmployeesSuccessAction => {
   return {
     type: employeesActionTypes.ADD_EMPLOYEE_SUCCESS,
+    payload: text,
   };
 };
 
@@ -222,8 +237,11 @@ export const deleteEmployee = (id: number) => async (dispatch: any) => {
     await fetch(`${API}/${id}`, {
       method: "DELETE",
     });
+    dispatch(deleteEmployeesSuccess("Employee deleted successfully!"));
+    setTimeout(() => {
+      dispatch(deleteEmployeesSuccess(null));
+    }, 3000);
     dispatch(fetchEmployees());
-    dispatch(deleteEmployeesSuccess());
   } catch (error: any) {
     dispatch(deleteEmployeesFailure(error.message));
   }
@@ -235,9 +253,12 @@ export const deleteEmployeesRequest = (): DeleteEmployeesRequestAction => {
   };
 };
 
-export const deleteEmployeesSuccess = (): DeleteEmployeesSuccessAction => {
+export const deleteEmployeesSuccess = (
+  text: string | null
+): DeleteEmployeesSuccessAction => {
   return {
     type: employeesActionTypes.DELETE_EMPLOYEE_SUCCESS,
+    payload: text,
   };
 };
 
