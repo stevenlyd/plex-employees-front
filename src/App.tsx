@@ -5,7 +5,9 @@ import AddIcon from "@mui/icons-material/Add";
 import ArrowBack from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForward from "@mui/icons-material/ArrowForwardIos";
 import {
+  Alert,
   Box,
+  Collapse,
   debounce,
   IconButton,
   Paper,
@@ -25,15 +27,18 @@ import { Employee } from "./util/types";
 
 function App() {
   const dispatch = useDispatch<AppDispatch>();
+
   const employees: Employee[] = useSelector(
-    (state: RootState) => state.employeesReducer.employeeList
+    (states: RootState) => states.employeesReducer.employeeList
   );
   const nextCursor = useSelector(
-    (state: RootState) => state.employeesReducer.nextCursor
+    (states: RootState) => states.employeesReducer.nextCursor
   );
   const prevCursor = useSelector(
-    (state: RootState) => state.employeesReducer.prevCursor
+    (states: RootState) => states.employeesReducer.prevCursor
   );
+  const success = useSelector((states: RootState) => states.employeesReducer.success);
+
   const [searchKeyword, setSearchKeyword] = useState("");
   const [open, setOpen] = useState(false);
   const [cursor, setCursor] = useState(null);
@@ -130,6 +135,10 @@ function App() {
         <Employeestable employees={employees} />
 
         <ConfigureEmployeeModal open={open} onClose={() => setOpen(false)} />
+
+        <Collapse in={!!success} timeout={150} orientation="vertical">
+          <Alert severity="success">{success}</Alert>
+        </Collapse>
       </Paper>
     </>
   );
